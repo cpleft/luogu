@@ -1,0 +1,53 @@
+#include<stdio.h>
+#include<string.h>
+#include<algorithm>
+using namespace std;
+
+int a[1000];//column
+int b[1000];//row
+struct node{
+    int x;
+    int y;
+};
+bool compare(node p,node q);
+bool compare_(node p,node q);
+int main(void){
+    
+    int m,n,k,l,d,j=0,u=0;
+    int x1,y1,x2,y2;
+    struct node column[1000];
+    struct node row[1000];
+    scanf("%d%d%d%d%d",&m,&n,&k,&l,&d);
+    for(int i=0;i<d;i++){
+        scanf("%d%d%d%d",&x1,&y1,&x2,&y2);
+        if(x1==x2) a[y1>y2?y2:y1]++;
+        if(y1==y2) b[x1>x2?x2:x1]++;
+    }
+    for(int i=0;i<1000;i++){
+        if(a[i]!=0){
+            column[j].x=a[i];//frequency 
+            column[j].y=i;  //column
+            j++;
+        }
+        if(b[i]!=0){
+            row[u].x=b[i];//frequency 
+            row[u].y=i;  //row
+            u++;
+        }
+    }
+    sort(column,column+j,compare);
+    sort(row,row+u,compare);
+    sort(column,column+l,compare_);
+    sort(row,row+k,compare_);
+    for(int i=0;i<k-1;i++) printf("%d ",row[i].y);
+    printf("%d\n",row[k-1].y);
+    for(int i=0;i<l-1;i++) printf("%d ",column[i].y);
+    printf("%d\n",column[l-1].y);
+    return 0;
+}
+bool compare(node p,node q){
+    return p.x>q.x;
+}
+bool compare_(node p,node q){
+    return p.y<q.y;
+}

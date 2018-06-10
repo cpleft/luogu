@@ -1,0 +1,23 @@
+#include<stdio.h>
+int arr[20000];
+int main(void){
+    int N,l,sum=0,ans=0;
+    scanf("%d",&N);
+    for(int i=0;i<N;i++) scanf("%d",&arr[i]);
+    for(int i=0;i<N;i++) sum+=arr[i];
+    l=sum/N;
+    for(int i=0;i<N-1;i++){
+        if(arr[i]>l){
+            arr[i+1]+=arr[i]-l;
+            arr[i]=l;
+            ans++; 
+        }
+        if(arr[i]<l){
+            arr[i+1]-=l-arr[i];
+            arr[i]=l;
+            ans++;
+        }
+    }
+    printf("%d\n",ans);
+    return 0;
+}
